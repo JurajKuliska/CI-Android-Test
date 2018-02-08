@@ -53,10 +53,10 @@ jobs:
       - run:
           name: UI tests - auth activate-service-account
           command: sudo /opt/google-cloud-sdk/bin/gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
-      - run
+      - run:
           name: UI tests - run
           command: echo "y" | sudo /opt/google-cloud-sdk/bin/gcloud beta firebase test android run --type instrumentation --app app/build/outputs/apk/app-debug.apk --test app/build/outputs/apk/app-debug-test-unaligned.apk --device model=Nexus6,version=21,locale=en,orientation=portrait --results-bucket ci-android-test
-      - run
+      - run:
           name: UI tests - upload artifacts
           command: sudo /opt/google-cloud-sdk/bin/gsutil -m cp -r -U `sudo /opt/google-cloud-sdk/bin/gsutil ls gs://ci-android-test | tail -1` $CIRCLE_ARTIFACTS/
 
