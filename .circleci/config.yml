@@ -32,3 +32,31 @@ jobs:
       - run:
           name: UI tests - sudo pip install
           command: sudo pip install -U crcmod
+      - run:
+          name: UI tests - assembleDebug
+          command: ./gradlew :app:assembleDebug -PdisablePreDex
+      - run:
+          name: UI tests - assembleDebugTest
+          command: ./gradlew :app:assembleDebugTest -PdisablePreDex
+      - run:
+          name: UI tests - decode gcloud service key
+          command: echo $GCLOUD_SERVICE_KEY | base64 --decode > ${HOME}/gcloud-service-key.json
+      - run:
+          name: UI tests - set project
+          command: sudo /opt/google-cloud-sdk/bin/gcloud config set project ci-android-test-194509
+      - run:
+          name: UI tests - update components
+          command: sudo /opt/google-cloud-sdk/bin/gcloud --quiet components update
+      - run:
+          name: UI tests - install components beta
+          command: sudo /opt/google-cloud-sdk/bin/gcloud --quiet components install beta
+      - run:
+          name: UI tests - auth activate-service-account
+          command: sudo /opt/google-cloud-sdk/bin/gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
+      - run
+          name: UI tests - run
+          command: echo "y" | sudo /opt/google-cloud-sdk/bin/gcloud beta firebase test android run --type instrumentation --app app/build/outputs/apk/app-debug.apk --test app/build/outputs/apk/app-debug-test-unaligned.apk --device model=Nexus6,version=21,locale=en,orientation=portrait --results-bucket ci-android-test
+      - run
+          name: UI tests - upload artifacts
+          command: sudo /opt/google-cloud-sdk/bin/gsutil -m cp -r -U `sudo /opt/google-cloud-sdk/bin/gsutil ls gs://ci-android-test | tail -1` $CIRCLE_ARTIFACTS/
+
