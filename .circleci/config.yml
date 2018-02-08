@@ -63,4 +63,6 @@ jobs:
       - run:
           name: UI tests - upload artifacts
           command: sudo gsutil -m cp -r -U `sudo gsutil ls gs://ci-android-test | tail -1` $CIRCLE_ARTIFACTS/
+      - store_test_results:
+          path: app/build/ui-test-results
 
