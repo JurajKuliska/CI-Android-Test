@@ -1,5 +1,6 @@
 dependencies:
   pre:
+    - sudo apt-get update; sudo apt-get install gcc python-setuptools
     - sudo pip install -U crcmod
   post:
     - ./gradlew :app:assembleDebug -PdisablePreDex
@@ -8,9 +9,9 @@ dependencies:
     - sudo /opt/google-cloud-sdk/bin/gcloud config set project ci-android-test-194509
     - sudo /opt/google-cloud-sdk/bin/gcloud --quiet components update
     - sudo /opt/google-cloud-sdk/bin/gcloud --quiet components install beta
-    - sudo /opt/google-cloud-sdk/bin/gcloud auth activate-service-account ci-android-test-service-accoun@ci-android-test-194509.iam.gserviceaccount.com --key-file ${HOME}/client-secret.json
+    - sudo /opt/google-cloud-sdk/bin/gcloud auth activate-service-account --key-file ${HOME}/client-secret.json
 test:
   override:
     - echo "y" | sudo /opt/google-cloud-sdk/bin/gcloud beta firebase test android run --app app/build/outputs/apk/app-debug.apk --test app/build/outputs/apk/app-debug-test-unaligned.apk --results-bucket cloud-test-ci-android-test-194509
   post:
-    - sudo /opt/google-cloud-sdk/bin/gsutil -m cp -r -U `sudo /opt/google-cloud-sdk/bin/gsutil ls gs://cloud-test-circle-ctl-test | tail -1` $CIRCLE_ARTIFACTS/ | true
+    - sudo /opt/google-cloud-sdk/bin/gsutil -m cp -r -U `sudo /opt/google-cloud-sdk/bin/gsutil ls gs://cloud-test-circle-ctl-test | tail -1` $CIRCLE_ARTIFACTS/
