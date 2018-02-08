@@ -44,12 +44,12 @@ jobs:
       - run:
           name: UI tests - set project
           command: sudo gcloud config set project $GCLOUD_PROJECT
-      - run:
-          name: UI tests - update components
-          command: sudo gcloud --quiet components update
-      - run:
-          name: UI tests - install components beta
-          command: sudogcloud --quiet components install beta
+#      - run:
+#          name: UI tests - update components
+#          command: sudo gcloud --quiet components update
+#      - run:
+#          name: UI tests - install components beta
+#          command: sudogcloud --quiet components install beta
       - run:
           name: UI tests - auth activate-service-account
           command: sudo gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
