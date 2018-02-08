@@ -29,3 +29,6 @@ jobs:
           destination: reports
       - store_test_results:
           path: app/build/test-results
+      - run:
+          name: UI tests - sudo pip install
+          command: sudo pip install -U crcmod
