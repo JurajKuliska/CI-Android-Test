@@ -29,20 +29,20 @@ jobs:
           destination: reports
       - store_test_results:
           path: app/build/test-results
-dependencies:
-  pre:
-    - sudo apt-get update; sudo apt-get install gcc python-setuptools
-    - sudo pip install -U crcmod
-  post:
-    - ./gradlew :app:assembleDebug -PdisablePreDex
-    - ./gradlew :app:assembleDebugTest -PdisablePreDex
-    - echo $GCLOUD_SERVICE_KEY | base64 --decode > ${HOME}/gcloud-service-key.json
-    - sudo /opt/google-cloud-sdk/bin/gcloud config set project ci-android-test-194509
-    - sudo /opt/google-cloud-sdk/bin/gcloud --quiet components update
-    - sudo /opt/google-cloud-sdk/bin/gcloud --quiet components install beta
-    - sudo /opt/google-cloud-sdk/bin/gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
-test:
-  override:
-    - echo "y" | sudo /opt/google-cloud-sdk/bin/gcloud beta firebase test android run --type instrumentation --app app/build/outputs/apk/app-debug.apk --test app/build/outputs/apk/app-debug-test-unaligned.apk --device model=Nexus6,version=21,locale=en,orientation=portrait --results-bucket ci-android-test
-  post:
-    - sudo /opt/google-cloud-sdk/bin/gsutil -m cp -r -U `sudo /opt/google-cloud-sdk/bin/gsutil ls gs://ci-android-test | tail -1` $CIRCLE_ARTIFACTS/
+  dependencies:
+    pre:
+      - sudo apt-get update; sudo apt-get install gcc python-setuptools
+      - sudo pip install -U crcmod
+    post:
+      - ./gradlew :app:assembleDebug -PdisablePreDex
+      - ./gradlew :app:assembleDebugTest -PdisablePreDex
+      - echo $GCLOUD_SERVICE_KEY | base64 --decode > ${HOME}/gcloud-service-key.json
+      - sudo /opt/google-cloud-sdk/bin/gcloud config set project ci-android-test-194509
+      - sudo /opt/google-cloud-sdk/bin/gcloud --quiet components update
+      - sudo /opt/google-cloud-sdk/bin/gcloud --quiet components install beta
+      - sudo /opt/google-cloud-sdk/bin/gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
+  test:
+    override:
+      - echo "y" | sudo /opt/google-cloud-sdk/bin/gcloud beta firebase test android run --type instrumentation --app app/build/outputs/apk/app-debug.apk --test app/build/outputs/apk/app-debug-test-unaligned.apk --device model=Nexus6,version=21,locale=en,orientation=portrait --results-bucket ci-android-test
+    post:
+      - sudo /opt/google-cloud-sdk/bin/gsutil -m cp -r -U `sudo /opt/google-cloud-sdk/bin/gsutil ls gs://ci-android-test | tail -1` $CIRCLE_ARTIFACTS/
