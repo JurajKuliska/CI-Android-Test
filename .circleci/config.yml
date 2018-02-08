@@ -36,8 +36,8 @@ jobs:
           name: UI tests - assembleDebug
           command: ./gradlew :app:assembleDebug -PdisablePreDex
       - run:
-          name: UI tests - assembleDebugTest
-          command: ./gradlew :app:assembleDebugTest -PdisablePreDex
+          name: UI tests - assembleAndroidTest
+          command: ./gradlew :app:assembleAndroidTest -PdisablePreDex
       - run:
           name: UI tests - decode gcloud service key
           command: echo $GCLOUD_SERVICE_KEY | base64 --decode > ${HOME}/gcloud-service-key.json
