@@ -59,8 +59,10 @@ jobs:
           command: echo ${HOME}/
       - run:
           name: UI tests - upload artifacts
-          command: sudo gsutil -m cp -r -U `sudo gsutil ls gs://ci-android-test | tail -1` ${HOME}/ | true
+          command: sudo gsutil -m cp -r -U `sudo gsutil ls gs://ci-android-test | tail -1` ${HOME}/code | true
+      - store_artifacts:
+          path: app/ui-tests
       - run:
           name: UI tests - ls home
-          command: ls -l ${HOME}
+          command: tree -d ${HOME}
 
