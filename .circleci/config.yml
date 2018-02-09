@@ -29,6 +29,8 @@ jobs:
           root: ~/code
           paths:
             - app
+      - persist_to_workspace:
+          root: ~/.gradle
 
 
   unit_test:
