@@ -64,5 +64,6 @@ jobs:
           command: sudo gsutil -m cp -r -U `sudo gsutil ls gs://ci-android-test | tail -1` /tmp/artifacts | true
       - store_artifacts:
           path: /tmp/artifacts
+          destination: /reports/ui-tests
 
 
