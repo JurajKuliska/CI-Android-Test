@@ -40,7 +40,7 @@ jobs:
     steps:
       - attach_workspace:
           # Must be absolute path or relative path from working_directory
-          at: /tmp/..
+          at: ~/code/app
       - run:
           name: Run Tests
           command: ./gradlew lint test
