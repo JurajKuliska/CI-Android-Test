@@ -28,7 +28,8 @@ jobs:
       - persist_to_workspace:
           root: ~/code
           paths:
-            - /..
+            - app
+
 
   unit_test:
     working_directory: ~/code
