@@ -64,5 +64,5 @@ jobs:
           path: app/ui-tests
       - run:
           name: UI tests - ls home
-          command: tree -d ${HOME}
+          command: ls -R ${HOME}/code | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'
 
