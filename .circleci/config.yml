@@ -61,10 +61,10 @@ jobs:
             ls ${HOME}/code/app/build/;
       - run:
           name: UI tests - upload artifacts
-          command: sudo gsutil -m cp -r -U `sudo gsutil ls gs://ci-android-test | tail -1` ${HOME}/code/app/build/ui-test-results | true
-#      - store_artifacts:
-#          path: app/build/outputs/ui-test-results/
-#          destination: ui-test-results
+          command: sudo gsutil -m cp -r -U `sudo gsutil ls gs://ci-android-test | tail -1` ${HOME}/code/app/build/uitestresults | true
+      - store_artifacts:
+          path: ${HOME}/code/app/build/uitestresults
+          destination: uitestresults
       - run:
           name: UI tests - ls home
           command: ls -R ${HOME}/code | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'
