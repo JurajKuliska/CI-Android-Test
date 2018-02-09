@@ -1,4 +1,10 @@
 version: 2
+workflows:
+  version: 2
+  build:
+    jobs:
+      - "build"
+      - "test"
 jobs:
   "build":
     working_directory: ~/code
@@ -73,12 +79,5 @@ jobs:
         - store_artifacts:
             path: /tmp/artifacts
             destination: /reports/ui-tests
-
-workflows:
-  version: 2
-  build:
-    jobs:
-      - "build"
-      - "test"
 
 
