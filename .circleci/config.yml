@@ -7,20 +7,20 @@ jobs:
     environment:
       JVM_OPTS: -Xmx3200m
     steps:
-      - checkout
-      - restore_cache:
-          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
-      ## The three lines below were initially commented out, however the build was failing so they needed to be included
-      - run:
-         name: Chmod permissions #if permission for Gradlew Dependencies fail, use this.
-         command: sudo chmod +x ./gradlew
-      - run:
-          name: Download Dependencies
-          command: ./gradlew androidDependencies
-      - save_cache:
-          paths:
-            - ~/.gradle
-          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+#      - checkout
+#      - restore_cache:
+#          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+#      ## The three lines below were initially commented out, however the build was failing so they needed to be included
+#      - run:
+#         name: Chmod permissions #if permission for Gradlew Dependencies fail, use this.
+#         command: sudo chmod +x ./gradlew
+#      - run:
+#          name: Download Dependencies
+#          command: ./gradlew androidDependencies
+#      - save_cache:
+#          paths:
+#            - ~/.gradle
+#          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
 #      - run:
 #          name: Run Tests
 #          command: ./gradlew lint test
@@ -56,7 +56,7 @@ jobs:
 #          command: echo "y" | sudo gcloud beta firebase test android run --type instrumentation --app app/build/outputs/apk/debug/app-debug.apk --test app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk --device model=Nexus6,version=21,locale=en,orientation=portrait --results-bucket ci-android-test
       - run:
           name: ls ${HOME}/code/app/build/
-          command: mkdir ${HOME}/code/app/build/ui-test-results
+          command: mkdir -p ${HOME}/code/app/build/ui-test-results
           command: ls ${HOME}/code/app/build/
       - run:
           name: UI tests - upload artifacts
