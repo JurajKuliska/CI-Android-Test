@@ -29,6 +29,10 @@ jobs:
     environment:
       JVM_OPTS: -Xmx3200m
     steps:
+      ## The three lines below were initially commented out, however the build was failing so they needed to be included
+      - run:
+          name: Chmod permissions #if permission for Gradlew Dependencies fail, use this.
+          command: sudo chmod +x ./gradlew
       - run:
           name: Run Tests
           command: ./gradlew lint test
