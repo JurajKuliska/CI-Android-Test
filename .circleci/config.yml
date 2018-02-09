@@ -53,9 +53,9 @@ jobs:
       - run:
           name: UI tests - auth activate-service-account
           command: sudo gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
-#      - run:
-#          name: UI tests - run
-#          command: echo "y" | sudo gcloud beta firebase test android run --type instrumentation --app app/build/outputs/apk/debug/app-debug.apk --test app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk --device model=Nexus6,version=21,locale=en,orientation=portrait --results-bucket ci-android-test
+      - run:
+          name: UI tests - run
+          command: echo "y" | sudo gcloud beta firebase test android run --type instrumentation --app app/build/outputs/apk/debug/app-debug.apk --test app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk --device model=Nexus6,version=21,locale=en,orientation=portrait --results-bucket ci-android-test
       - run:
           name: UI tests - create ui-tests folder
           command: mkdir /tmp/artifacts
