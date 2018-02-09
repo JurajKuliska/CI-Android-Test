@@ -22,7 +22,7 @@ jobs:
             - ~/.gradle
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
 
-  unittest:
+  unit_test:
     working_directory: ~/code
     docker:
       - image: circleci/android:api-27-alpha
@@ -38,7 +38,7 @@ jobs:
       - store_test_results:
           path: app/build/test-results
 
-  uitest:
+  ui_test:
     working_directory: ~/code
     docker:
       - image: circleci/android:api-27-alpha
@@ -84,13 +84,13 @@ jobs:
 
 workflows:
   version: 2
-  build:
+  build_and_test:
     jobs:
       - build
-      - unittest
+      - unit_test
           requires:
             - build
-      - uitest
+      - ui_test
           requires:
             - build
 
