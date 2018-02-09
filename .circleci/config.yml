@@ -26,7 +26,7 @@ jobs:
             - ~/.gradle
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
       - persist_to_workspace:
-          root: workspace
+          root: /..
 
   unit_test:
     working_directory: ~/code
@@ -37,7 +37,7 @@ jobs:
     steps:
       - attach_workspace:
           # Must be absolute path or relative path from working_directory
-          at: /tmp/workspace
+          at: /tmp/..
       - run:
           name: Run Tests
           command: ./gradlew lint test
