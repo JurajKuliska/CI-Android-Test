@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  build:
+  "build":
     working_directory: ~/code
     docker:
       - image: circleci/android:api-27-alpha
@@ -30,7 +30,7 @@ jobs:
       - store_test_results:
           path: app/build/test-results
 
-  test:
+  "test":
     working_directory: ~/code
       docker:
         - image: circleci/android:api-27-alpha
@@ -76,9 +76,9 @@ jobs:
 
 workflows:
   version: 2
-  build_and_test:
+  build:
     jobs:
-      - build
-      - test
+      - "build"
+      - "test"
 
 
