@@ -87,11 +87,11 @@ workflows:
   build_and_test:
     jobs:
       - build
-      - unit_test
+      - unit_test:
           requires:
             - build
-#      - ui_test
-#          requires:
-#            - build
+      - ui_test:
+          requires:
+            - build
 
 
