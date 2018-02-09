@@ -8,6 +8,7 @@ jobs:
       JVM_OPTS: -Xmx3200m
     steps:
       - checkout
+      - run: mkdir -p workspace
       - restore_cache:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
       ## The three lines below were initially commented out, however the build was failing so they needed to be included
@@ -17,12 +18,15 @@ jobs:
       - run:
           name: Download Dependencies
           command: ./gradlew androidDependencies
+      - run:
+          name: ls all files
+          command: ls ${HOME}
       - save_cache:
           paths:
             - ~/.gradle
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
       - persist_to_workspace:
-          root: /
+          root: workspace
 
   unit_test:
     working_directory: ~/code
@@ -33,7 +37,7 @@ jobs:
     steps:
       - attach_workspace:
           # Must be absolute path or relative path from working_directory
-          at: /tmp
+          at: /tmp/workspace
       - run:
           name: Run Tests
           command: ./gradlew lint test
