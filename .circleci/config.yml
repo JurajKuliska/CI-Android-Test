@@ -55,11 +55,11 @@ jobs:
 #          name: UI tests - run
 #          command: echo "y" | sudo gcloud beta firebase test android run --type instrumentation --app app/build/outputs/apk/debug/app-debug.apk --test app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk --device model=Nexus6,version=21,locale=en,orientation=portrait --results-bucket ci-android-test
       - run:
-          name: ${HOME}/ echo
-          command: echo ${HOME}/
+          name: ls ${HOME}/code/app/build/
+          command: mkdir ${HOME}/code/app/build/ui-test-results
+          command: ls ${HOME}/code/app/build/
       - run:
           name: UI tests - upload artifacts
-          command: mkdir ${HOME}/code/app/build/ui-test-results
           command: sudo gsutil -m cp -r -U `sudo gsutil ls gs://ci-android-test | tail -1` ${HOME}/code/app/build/ui-test-results | true
 #      - store_artifacts:
 #          path: app/build/outputs/ui-test-results/
