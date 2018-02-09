@@ -55,28 +55,16 @@ jobs:
 #          name: UI tests - run
 #          command: echo "y" | sudo gcloud beta firebase test android run --type instrumentation --app app/build/outputs/apk/debug/app-debug.apk --test app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk --device model=Nexus6,version=21,locale=en,orientation=portrait --results-bucket ci-android-test
       - run:
-          name: ls ${HOME}/code/app/build/
-          command: |
-            mkdir /uitestresults;
-            ls ${HOME};
+            name: Creating Dummy Artifacts
+            command: mkdir /tmp/artifacts;
       - run:
           name: UI tests - upload artifacts
-          command: sudo gsutil -m cp -r -U `sudo gsutil ls gs://ci-android-test | tail -1` ${HOME}/uitestresults | true
+          command: sudo gsutil -m cp -r -U `sudo gsutil ls gs://ci-android-test | tail -1` /tmp/artifacts | true
       - store_artifacts:
-          path: uitestresults
-          destination: uitestresults
+          path: /tmp/artifacts
+#          destination: /tmp/artifacts
 #      - run:
 #          name: UI tests - ls home
 #          command: ls -R ${HOME}/code | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'
-      - run:
-          name: Creating Dummy Artifacts
-          command: |
-            echo "my artifact file" > /tmp/artifact-1;
-            mkdir /tmp/artifacts;
-            echo "my artifact files in a dir" > /tmp/artifacts/artifact-2;
-      - store_artifacts:
-          path: /tmp/artifact-1
-          destination: artifact-file
-      - store_artifacts:
-          path: /tmp/artifacts
+
 
