@@ -44,25 +44,25 @@ jobs:
       - store_artifacts:
           path: app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk
           destination: apk/app-debug-androidTest.apk
-#      - run:
-#          name: UI tests - decode gcloud service key
-#          command: echo $GCLOUD_SERVICE_KEY | base64 --decode > ${HOME}/gcloud-service-key.json
-#      - run:
-#          name: UI tests - set project
-#          command: sudo gcloud config set project $GCLOUD_PROJECT
-#      - run:
-#          name: UI tests - auth activate-service-account
-#          command: sudo gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
-#      - run:
-#          name: UI tests - run
-#          command: echo "y" | sudo gcloud beta firebase test android run --type instrumentation --app app/build/outputs/apk/debug/app-debug.apk --test app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk --device model=Nexus6,version=21,locale=en,orientation=portrait --results-bucket ci-android-test
-#      - run:
-#            name: Creating Artifacts folder
-#            command: mkdir /tmp/artifacts;
-#      - run:
-#          name: UI tests - upload artifacts
-#          command: sudo gsutil -m cp -r -U `sudo gsutil ls gs://ci-android-test | tail -1` /tmp/artifacts | true
-#      - store_artifacts:
-#          path: /tmp/artifacts
+      - run:
+          name: UI tests - decode gcloud service key
+          command: echo $GCLOUD_SERVICE_KEY | base64 --decode > ${HOME}/gcloud-service-key.json
+      - run:
+          name: UI tests - set project
+          command: sudo gcloud config set project $GCLOUD_PROJECT
+      - run:
+          name: UI tests - auth activate-service-account
+          command: sudo gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
+      - run:
+          name: UI tests - run
+          command: echo "y" | sudo gcloud beta firebase test android run --type instrumentation --app app/build/outputs/apk/debug/app-debug.apk --test app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk --device model=Nexus6,version=21,locale=en,orientation=portrait --results-bucket ci-android-test
+      - run:
+          name: UI tests - create ui-tests folder
+          command: mkdir /reports/ui-tests;
+      - run:
+          name: UI tests - upload artifacts
+          command: sudo gsutil -m cp -r -U `sudo gsutil ls gs://ci-android-test | tail -1` /reports/ui-tests | true
+      - store_artifacts:
+          path: /reports/ui-tests
 
 
