@@ -37,13 +37,13 @@ jobs:
           command: ./gradlew :app:assembleDebug -PdisablePreDex
       - store_artifacts:
           path: app/build/outputs/apk/debug/app-debug.apk
-          destination: apk
-#      - run:
-#          name: UI tests - assembleAndroidTest
-#          command: ./gradlew :app:assembleAndroidTest -PdisablePreDex
-#      - store_artifacts:
-#          path: app/build/outputs/apk/androidTest/debug
-#          destination: apk
+          destination: apk/app-debug.apk
+      - run:
+          name: UI tests - assembleAndroidTest
+          command: ./gradlew :app:assembleAndroidTest -PdisablePreDex
+      - store_artifacts:
+          path: app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk
+          destination: apk/app-debug-androidTest.apk
 #      - run:
 #          name: UI tests - decode gcloud service key
 #          command: echo $GCLOUD_SERVICE_KEY | base64 --decode > ${HOME}/gcloud-service-key.json
