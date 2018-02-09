@@ -57,7 +57,7 @@ jobs:
       - run:
           name: ls ${HOME}/code/app/build/
           command: |
-            mkdir /code/app/build/uitestresults;
+            mkdir ${HOME}/code/app/build/uitestresults;
             ls ${HOME}/code/app/build/;
       - run:
           name: UI tests - upload artifacts
