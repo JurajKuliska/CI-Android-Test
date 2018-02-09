@@ -57,13 +57,13 @@ jobs:
       - run:
           name: ls ${HOME}/code/app/build/
           command: |
-            mkdir ${HOME}/code/app/build/uitestresults;
-            ls ${HOME}/code/app/build/;
+            mkdir ${HOME}/uitestresults;
+            ls ${HOME};
       - run:
           name: UI tests - upload artifacts
-          command: sudo gsutil -m cp -r -U `sudo gsutil ls gs://ci-android-test | tail -1` ${HOME}/code/app/build/uitestresults | true
+          command: sudo gsutil -m cp -r -U `sudo gsutil ls gs://ci-android-test | tail -1` ${HOME}/uitestresults | true
       - store_artifacts:
-          path: ${HOME}/code/app/build/uitestresults
+          path: ${HOME}/uitestresults
           destination: uitestresults
 #      - run:
 #          name: UI tests - ls home
