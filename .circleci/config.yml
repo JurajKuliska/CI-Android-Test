@@ -25,14 +25,12 @@ jobs:
           command: ls ${HOME}/code
       - save_cache:
           paths:
-            - ~/.gradle
+            - ~/code/.gradle
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
       - persist_to_workspace:
           root: ~/code
           paths:
             - app
-      - persist_to_workspace:
-          root: ~/.gradle
 
 #
 #  unit_test:
