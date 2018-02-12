@@ -21,16 +21,17 @@ jobs:
           name: ls all files in ${HOME}
           command: ls ${HOME}
       - run:
-          name: ls all files in ${HOME}/code
-          command: ls ${HOME}/code
+          name: ls all files in ${HOME}/code/app
+          command: ls ${HOME}/code/app
       - save_cache:
           paths:
-            - ~/code/.gradle
+            - ~/.gradle
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
       - persist_to_workspace:
           root: ~/code
           paths:
             - app
+            - src
 
 #
 #  unit_test:
