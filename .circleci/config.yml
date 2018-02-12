@@ -34,7 +34,14 @@ jobs:
           root: ~/code
           paths:
             - app
-            - src
+            - build
+            - build.gradle
+            - gradle
+            - gradle.properties
+            - gradlew
+            - gradlew.bat
+            - README.md
+            - settings.gradle
 
 
   unit_test:
