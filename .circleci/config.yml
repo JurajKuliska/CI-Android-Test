@@ -21,8 +21,8 @@ jobs:
           name: ls all files in ${HOME}
           command: ls ${HOME}
       - run:
-          name: ls all files in ${HOME}/src
-          command: ls ${HOME}/src
+          name: ls all files in ${HOME}/code
+          command: ls ${HOME}/code
       - save_cache:
           paths:
             - ~/.gradle
