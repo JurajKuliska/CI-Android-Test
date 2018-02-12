@@ -43,13 +43,10 @@ jobs:
     steps:
       - attach_workspace:
           # Must be absolute path or relative path from working_directory
-          at: ~/code/app
+          at: ~/code
       - run:
           name: ls all files in ${HOME}
           command: ls ${HOME}
-      - run:
-          name: ls all files in ${HOME}/code/app
-          command: ls ${HOME}/code/app
       - run:
           name: ls all files in ${HOME}/code/app
           command: ls ${HOME}/code/app
