@@ -10,9 +10,30 @@ android {
 		versionName "1.0"
 		testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 	}
-	buildTypes {
+
+	signingConfigs {
+		debug {
+			storeFile file("keystores/debug.keystore")
+		}
+
 		release {
+			storeFile file("keystores/release.keystore")
+			keyAlias "CiTestProject"
+		}
+		apply from: 'releaseConfig.gradle', to: release
+		// The "releaseConfig.gradle" file should contain keystore passwords. See top-level README for details.
+	}
+
+	buildTypes {
+		debug {
 			minifyEnabled false
+			shrinkResources false
+		}
+		release {
+			signingConfig signingConfigs.release
+			minifyEnabled true
+			zipAlignEnabled true
+			shrinkResources true
 			proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 		}
 	}
