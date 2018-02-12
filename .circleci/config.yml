@@ -21,6 +21,9 @@ jobs:
           name: ls all files in ${HOME}
           command: ls ${HOME}
       - run:
+          name: ls all files in ${HOME}/code
+          command: ls ${HOME}/code
+      - run:
           name: ls all files in ${HOME}/code/app
           command: ls ${HOME}/code/app
       - save_cache:
@@ -48,8 +51,14 @@ jobs:
           name: ls all files in ${HOME}
           command: ls ${HOME}
       - run:
+          name: ls all files in ${HOME}/code
+          command: ls ${HOME}/code
+      - run:
           name: ls all files in ${HOME}/code/app
           command: ls ${HOME}/code/app
+      - run:
+          name: Chmod permissions #if permission for Gradlew Dependencies fail, use this.
+          command: sudo chmod +x ./gradlew
       - run:
           name: Run Tests
           command: ./gradlew lint test
