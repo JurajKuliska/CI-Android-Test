@@ -46,9 +46,6 @@ jobs:
           # Must be absolute path or relative path from working_directory
           at: ~/code
       - run:
-          name: Chmod permissions #if permission for Gradlew Dependencies fail, use this.
-          command: sudo chmod +x ./gradlew
-      - run:
           name: Run Tests
           command: ./gradlew lint test
       - store_artifacts:
