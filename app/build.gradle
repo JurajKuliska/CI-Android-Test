@@ -8,8 +8,8 @@ android {
 		applicationId "com.strv.citestproject"
 		minSdkVersion 16
 		targetSdkVersion 27
-		versionCode 1
-		versionName "1.0"
+		versionCode 2
+		versionName "1.0.1"
 		testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 		vectorDrawables.useSupportLibrary = true
 	}
@@ -41,15 +41,20 @@ android {
 		}
 	}
 
-//	playAccountConfigs {
-//		defaultAccountConfig {
-//			jsonFile = file(new File('keystores/service_key.json'))
-//		}
-//	}
-//
-//	defaultConfig {
-//		playAccountConfig = playAccountConfigs.defaultAccountConfig
-//	}
+	play {
+		track = 'alpha' // or 'rollout' or 'beta' or 'alpha'
+		userFraction = 1.0 // only necessary for 'rollout', in this case default is 0.1 (10% of the target)
+	}
+
+	playAccountConfigs {
+		defaultAccountConfig {
+			jsonFile = file('keystores/google_play_console_service_key.json')
+		}
+	}
+
+	defaultConfig {
+		playAccountConfig = playAccountConfigs.defaultAccountConfig
+	}
 }
 
 dependencies {

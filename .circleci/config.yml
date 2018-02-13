@@ -8,6 +8,9 @@ jobs:
       JVM_OPTS: -Xmx3200m
     steps:
       - checkout
+      - run:
+          name: Create the google play console service key json file
+          command: echo $GOOGLE_PLAY_CONSOLE_SERVICE_KEY | base64 --decode > ${HOME}/code/app/keystores/google_play_console_service_key.json
       - restore_cache:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
       ## The three lines below were initially commented out, however the build was failing so they needed to be included
@@ -33,16 +36,7 @@ jobs:
             - gradlew.bat
             - README.md
             - settings.gradle
-      - run:
-          name: ls ${HOME}/code/app/keystores/
-          command: ls ${HOME}/code/app/keystores/
-      - run:
-          name: Create the google play console service key json file
-          command: echo $GOOGLE_PLAY_CONSOLE_SERVICE_KEY | base64 --decode > ${HOME}/code/app/keystores/google_play_console_service_key.json
-      - run:
-          name: ls ${HOME}/code/app/keystores/
-          command: ls ${HOME}/code/app/keystores/
-#
+
 #  unit_test:
 #    working_directory: ~/code
 #    docker:
@@ -108,6 +102,19 @@ jobs:
 #      - store_artifacts:
 #          path: /tmp/artifacts
 #          destination: /reports/ui-tests
+  publish_to_google_play:
+      working_directory: ~/code
+      docker:
+        - image: circleci/android:api-27-alpha
+      environment:
+        JVM_OPTS: -Xmx3200m
+      steps:
+        - attach_workspace:
+            # Must be absolute path or relative path from working_directory
+            at: ~/code
+        - run:
+            name: Publish apk release
+            command: ./gradlew :app:publishApkRelease -PdisablePreDex
 
 workflows:
   version: 2
@@ -120,5 +127,8 @@ workflows:
 #      - ui_test:
 #          requires:
 #            - build
+      - publish_to_google_play:
+          requires:
+            - build
 
 
