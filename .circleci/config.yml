@@ -40,8 +40,8 @@ jobs:
           name: Create the google play console service key json file
           command: echo $GOOGLE_PLAY_CONSOLE_SERVICE_KEY | base64 --decode > ${HOME}/code/app/keystores/google_play_console_service_key.json
       - run:
-          name: ls /app/keystores/
-          command: ls /app/keystores/
+          name: ls ${HOME}/code/app/keystores/
+          command: ls ${HOME}/code/app/keystores/
 #
 #  unit_test:
 #    working_directory: ~/code
