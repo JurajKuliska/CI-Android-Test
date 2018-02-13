@@ -41,16 +41,15 @@ android {
 		}
 	}
 
-//	playAccountConfigs {
-//		defaultAccountConfig {
-//			serviceAccountEmail = 'your-service-account-email'
-//			pk12File = file('key.p12')
-//		}
-//	}
-//
-//	defaultConfig {
-//		playAccountConfig = playAccountConfigs.defaultAccountConfig
-//	}
+	playAccountConfigs {
+		defaultAccountConfig {
+			jsonFile = file(new File('keystores/service_key.json'))
+		}
+	}
+
+	defaultConfig {
+		playAccountConfig = playAccountConfigs.defaultAccountConfig
+	}
 }
 
 dependencies {
