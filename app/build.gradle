@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+apply plugin:'com.android.application'
+apply plugin: 'com.github.triplet.play'
 
 android {
 	compileSdkVersion 27
@@ -38,6 +40,17 @@ android {
 			proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 		}
 	}
+
+//	playAccountConfigs {
+//		defaultAccountConfig {
+//			serviceAccountEmail = 'your-service-account-email'
+//			pk12File = file('key.p12')
+//		}
+//	}
+//
+//	defaultConfig {
+//		playAccountConfig = playAccountConfigs.defaultAccountConfig
+//	}
 }
 
 dependencies {
