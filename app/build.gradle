@@ -41,15 +41,15 @@ android {
 		}
 	}
 
-	playAccountConfigs {
-		defaultAccountConfig {
-			jsonFile = file(new File('keystores/service_key.json'))
-		}
-	}
-
-	defaultConfig {
-		playAccountConfig = playAccountConfigs.defaultAccountConfig
-	}
+//	playAccountConfigs {
+//		defaultAccountConfig {
+//			jsonFile = file(new File('keystores/service_key.json'))
+//		}
+//	}
+//
+//	defaultConfig {
+//		playAccountConfig = playAccountConfigs.defaultAccountConfig
+//	}
 }
 
 dependencies {
