@@ -138,6 +138,6 @@ workflows:
       - publish_to_google_play:
           filters:
             tags:
-              only: /release-v[0-9]+(\.[0-9]+)*/
+              only: /juraj je pan/
           requires:
             - build
