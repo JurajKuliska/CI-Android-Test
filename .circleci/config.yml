@@ -140,4 +140,4 @@ workflows:
             - build
           filters:
             tags:
-              only: juraj-je-pan
+              only: /release-v[0-9]+(\.[0-9]+)*/
