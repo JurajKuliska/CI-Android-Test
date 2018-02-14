@@ -9,6 +9,8 @@ jobs:
     filters:
       tags:
         only: /.*/
+      branches:
+        only: /.*/
     steps:
       - checkout
       - run:
@@ -112,6 +114,8 @@ jobs:
       environment:
         JVM_OPTS: -Xmx3200m
       filters:
+        branches:
+          only: /.*/
         tags:
           only: /release-v[0-9]+(\.[0-9]+)*/
       steps:
@@ -133,6 +137,8 @@ workflows:
     jobs:
       - build:
           filters:
+            branches:
+              only: /.*/
             tags:
               only: /.*/
 #      - unit_test:
@@ -145,5 +151,7 @@ workflows:
           requires:
             - build
           filters:
+            branches:
+              only: /.*/
             tags:
               only: /release-v[0-9]+(\.[0-9]+)*/
