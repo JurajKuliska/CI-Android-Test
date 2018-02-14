@@ -145,6 +145,8 @@ workflows:
       - publish_to_google_play:
           requires:
             - build
+            - unit_test
+            - ui_test
           filters:
             branches:
               ignore: /.*/
