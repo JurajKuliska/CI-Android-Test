@@ -136,8 +136,8 @@ workflows:
 #          requires:
 #            - build
       - publish_to_google_play:
+          requires:
+            - build
           filters:
             tags:
               only: juraj-je-pan
-          requires:
-            - build
