@@ -126,9 +126,9 @@ workflows:
   build_and_test:
     jobs:
       - build:
-          filters:
-            branches:
-              only: /.*/
+#          filters:
+#            branches:
+#              only: /.*/
 #      - unit_test:
 #          requires:
 #            - build
