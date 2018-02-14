@@ -126,9 +126,9 @@ workflows:
   build_and_test:
     jobs:
       - build:
-#          filters:
-#            branches:
-#              only: /.*/
+          filters:
+            tags:
+              only: /.*/
 #      - unit_test:
 #          requires:
 #            - build
@@ -137,8 +137,7 @@ workflows:
 #            - build
       - publish_to_google_play:
           filters:
-            branches:
-              only:
-                - master #/release-v[0-9]+(\.[0-9]+)*/
+            tags:
+              only: /release-v[0-9]+(\.[0-9]+)*/
           requires:
             - build
