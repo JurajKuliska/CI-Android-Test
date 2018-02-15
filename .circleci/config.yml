@@ -116,11 +116,6 @@ jobs:
         - run:
             name: Publish apk release
             command: ./gradlew :app:publishApkRelease -PdisablePreDex
-#              if [[ ${CIRCLE_TAG} =~ release-v[0-9]+(\.[0-9]+)* ]]
-#              then
-#              else
-#                echo "not building as the tag wasn't specified or wasn't valid"
-#              fi
 
 workflows:
   version: 2
