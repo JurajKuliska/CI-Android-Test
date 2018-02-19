@@ -11,6 +11,9 @@ jobs:
       - run:
           name: Create the google play console service key json file
           command: echo $GOOGLE_PLAY_CONSOLE_SERVICE_KEY | base64 --decode > ${HOME}/code/app/keystores/google_play_console_service_key.json
+      - run:
+          name: gcloud project id
+          command: echo $GCLOUD_PROJECT
       - restore_cache:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
       ## The three lines below were initially commented out, however the build was failing so they needed to be included
