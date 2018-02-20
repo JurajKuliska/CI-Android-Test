@@ -9,7 +9,7 @@ gcloud config set project $GCP_PROJECT
 
 RESULT_DIR="build-$BITRISE_BUILD_NUMBER"
 
-APK="--app=$BITRISE_DEPLOY_DIR/app-debug-unaligned.apk --test=$BITRISE_DEPLOY_DIR/app-debug-androidTest-unaligned.apk"
+APK="--app=$BITRISE_DEPLOY_DIR/app-debug.apk --test=$BITRISE_DEPLOY_DIR/app-debug-androidTest.apk"
 
 TYPE="instrumentation"
 DEVICES="--device model=Nexus6,version=21,locale=en,orientation=portrait"
