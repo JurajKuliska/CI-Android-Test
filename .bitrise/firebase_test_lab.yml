@@ -1,0 +1,35 @@
+set -ex
+
+#Download service account key
+curl -o /tmp/sacc_key.json $BITRISEIO_SERVICE_ACCOUNT_KEY_URL
+#Activate cloud client with the service account
+gcloud auth activate-service-account -q --key-file /tmp/sacc_key.json
+#Set the project's id used on Google Cloud Platform
+gcloud config set project $GCP_PROJECT
+
+RESULT_DIR="build-$BITRISE_BUILD_NUMBER"
+
+APK="--app=$BITRISE_DEPLOY_DIR/app-debug-unaligned.apk --test=$BITRISE_DEPLOY_DIR/app-debug-androidTest-unaligned.apk"
+
+TYPE="instrumentation"
+DEVICES="--device model=Nexus6,version=21,locale=en,orientation=portrait"
+
+gcloud firebase test android run $APK $DEVICES --type=$TYPE --results-dir=$RESULT_DIR/ >>$BITRISE_DEPLOY_DIR/gcloudlog.log 2>&1
+
+SRCPTH=$BITRISE_DEPLOY_DIR/test_results
+EXPPTH=$BITRISE_DEPLOY_DIR
+mkdir $SRCPTH
+
+#Download test results
+
+FB_BUCKET=$(grep -oP "(?<=browser\/).*(?<=\/$RESULT_DIR)" $BITRISE_DEPLOY_DIR/gcloudlog.log)
+
+gsutil -m cp -R gs://$FB_BUCKET $SRCPTH
+
+for file in $(find $SRCPTH -type f)
+do
+    if [[ -f $file ]]; then
+       f=$(echo ${file//$SRCPTH\/$RESULT_DIR\/})
+       mv $file $(echo $EXPPTH/${f//\//_})
+    fi
+done
