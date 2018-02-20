@@ -30,10 +30,10 @@ gsutil -m cp -r -U `sudo gsutil ls gs://ci-android-test | tail -1` $SRCPTH | tru
 #
 #gsutil -m cp -R gs://$FB_BUCKET $SRCPTH
 #
-#for file in $(find $SRCPTH -type f)
-#do
-#    if [[ -f $file ]]; then
-#       f=$(echo ${file//$SRCPTH\/$RESULT_DIR\/})
-#       mv $file $(echo $EXPPTH/${f//\//_})
-#    fi
-#done
+for file in $(find $SRCPTH -type f)
+do
+    if [[ -f $file ]]; then
+       f=$(echo ${file//$SRCPTH\/$RESULT_DIR\/})
+       mv $file $(echo $EXPPTH/${f//\//_})
+    fi
+done
