@@ -20,7 +20,7 @@ android {
 		}
 
 		release {
-			storeFile file(System.getenv("BITRISEIO_ANDROID_KEYSTORE_URL") == null ? "keystores/release.keystore" : System.getenv("BITRISEIO_ANDROID_KEYSTORE_URL")) //file("keystores/release.keystore")
+			storeFile file(new URL(System.getenv("BITRISEIO_ANDROID_KEYSTORE_URL") == null ? "file://keystores/release.keystore" : System.getenv("BITRISEIO_ANDROID_KEYSTORE_URL")).toURI()) //file("keystores/release.keystore")
 			keyAlias System.getenv("BITRISEIO_ANDROID_KEYSTORE_ALIAS") //"CiTestProject"
 			storePassword System.getenv("BITRISEIO_ANDROID_KEYSTORE_PASSWORD") //"bk7MD9m4mHZcHvm2"
 			keyPassword System.getenv("BITRISEIO_ANDROID_KEYSTORE_PRIVATE_KEY_PASSWORD") //"JDJyCTH6J9bpXUmp"
