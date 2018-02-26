@@ -23,20 +23,6 @@ jobs:
       - run:
           name: Download Dependencies
           command: ./gradlew androidDependencies
-      - run:
-          name: Decode release.keystore
-          command: |
-                mkdir -p $HOME/keystores/
-                cd $HOME/keystores/
-                echo $ANDROID_KEYSTORE | base64 --decode > release.keystore
-                ls $HOME/keystores/
-                ls ~/code
-      - run:
-          name: Build release apk
-          command: ./gradlew assembleRelease
-      - store_artifacts:
-          path: app/build/outputs/apk/debug/app-release.apk
-          destination: apk/app-release.apk
       - save_cache:
           paths:
             - ~/.gradle
@@ -130,6 +116,13 @@ jobs:
         - attach_workspace:
             # Must be absolute path or relative path from working_directory
             at: ~/code
+        - run:
+            name: Decode release.keystore
+            command: |
+                  mkdir -p $HOME/keystores/
+                  cd $HOME/keystores/
+                  echo $ANDROID_KEYSTORE | base64 --decode > release.keystore
+                  ls $HOME/keystores/
         - run:
             name: Publish apk release
             command: ./gradlew :app:publishApkRelease -PdisablePreDex
