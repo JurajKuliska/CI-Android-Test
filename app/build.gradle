@@ -20,11 +20,11 @@ android {
 		}
 
 		release {
-			storeFile file("keystores/release.keystore")
-			keyAlias "CiTestProject"
+			storeFile file(System.getenv("HOME") + "/keystores/release.keystore")
+			keyAlias System.getenv("BITRISEIO_ANDROID_KEYSTORE_ALIAS")
+			storePassword System.getenv("BITRISEIO_ANDROID_KEYSTORE_PRIVATE_KEY_PASSWORD")
+			keyPassword System.getenv("BITRISEIO_ANDROID_KEYSTORE_PASSWORD")
 		}
-		apply from: 'releaseConfig.gradle', to: release
-		// The "releaseConfig.gradle" file should contain keystore passwords. See top-level README for details.
 	}
 
 	buildTypes {
