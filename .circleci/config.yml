@@ -30,6 +30,7 @@ jobs:
                 cd $HOME/keystores/
                 echo $ANDROID_KEYSTORE | base64 --decode > release.keystore
                 ls $HOME/keystores/
+                ls ~/code
       - run:
           name: Build release apk
           command: ./gradlew assembleRelease
