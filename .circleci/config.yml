@@ -23,13 +23,13 @@ jobs:
       - run:
           name: Download Dependencies
           command: ./gradlew androidDependencies
-#      - run:
-#          name: Decode release.keystore
-#          command: |
-#                mkdir -p $HOME/keystores/
-#                cd $HOME/keystores/
-#                echo $ANDROID_KEYSTORE | base64 --decode > release.keystore
-#                ls $HOME/keystores/
+      - run:
+          name: Decode release.keystore
+          command: |
+                mkdir -p $HOME/keystores/
+                cd $HOME/keystores/
+                echo $ANDROID_KEYSTORE | base64 --decode > release.keystore
+                ls $HOME/keystores/
       - run:
           name: Build release apk
           command: ./gradlew assembleRelease
