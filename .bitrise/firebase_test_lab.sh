@@ -14,8 +14,6 @@ APK="--app=$BITRISE_DEPLOY_DIR/app-debug.apk --test=$BITRISE_DEPLOY_DIR/app-debu
 TYPE="instrumentation"
 DEVICES="--device model=Nexus6,version=21,locale=en,orientation=portrait"
 
-ls $BITRISE_DEPLOY_DIR
-
 echo "y" | gcloud firebase test android run $APK $DEVICES --type=$TYPE --results-bucket ci-android-test
 
 SRCPTH=$BITRISE_DEPLOY_DIR/test_results
