@@ -14,7 +14,7 @@ APK="--app=$BITRISE_DEPLOY_DIR/app-debug.apk --test=$BITRISE_DEPLOY_DIR/app-debu
 TYPE="instrumentation"
 DEVICES="--device model=Nexus6,version=21,locale=en,orientation=portrait"
 
-echo "y" | gcloud firebase test android run $APK $DEVICES --type=$TYPE --results-bucket ci-android-test
+echo "y" | gcloud firebase test android run $APK $DEVICES --type=$TYPE --results-bucket $GCP_PROJECT
 
 SRCPTH=$BITRISE_DEPLOY_DIR/test_results
 EXPPTH=$BITRISE_DEPLOY_DIR
@@ -22,7 +22,7 @@ mkdir $SRCPTH
 
 #Download test results
 
-gsutil -m cp -r -U `sudo gsutil ls gs://ci-android-test | tail -1` $SRCPTH | true
+gsutil -m cp -r -U `sudo gsutil ls gs://$GCP_PROJECT | tail -1` $SRCPTH | true
 
 for file in $(find $SRCPTH -type f)
 do
